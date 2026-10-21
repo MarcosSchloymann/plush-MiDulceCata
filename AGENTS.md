@@ -113,3 +113,4 @@ No hay `npm run lint` ni `npm test`.
 5. Si cambió el servidor o los tipos, correr el build del cliente y `npx tsc -p tsconfig.json --noEmit` dentro de `server/`.
 6. Si cambió Prisma, aplicar la migración en Postgres local (`npm run db:up` + `npx prisma migrate deploy`) y comprobar que el seed sigue arrancando en una base vacía.
 7. Para Render: `DATABASE_URL` de Neon, `PUBLIC_URL` HTTPS, health en `/api/public/health`, y las tres variables de Cloudinary. Sin Cloudinary, `uploads/` en plan free no es persistente entre redeploys.
+8. Neon pooler (`*-pooler.*`) rompe `prisma migrate` (advisory lock P1002). El script `render-build.js` migra con el host directo; la app puede seguir usando el pooler. Opcional: `DIRECT_URL` sin `-pooler`.
