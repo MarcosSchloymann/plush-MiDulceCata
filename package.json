@@ -1,0 +1,22 @@
+{
+  "name": "midulcecata",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Catálogo web de Mi Dulce Cata con panel de administración.",
+  "scripts": {
+    "setup": "node scripts/install.js",
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "start": "npm run start --prefix server",
+    "prod": "node scripts/production.js",
+    "render:build": "node scripts/render-build.js",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

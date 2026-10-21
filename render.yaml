@@ -1,0 +1,29 @@
+# Blueprint para Render (plan free del Web Service).
+# La base PostgreSQL gratuita de Render ya no está disponible en todos los planes:
+# usá Neon (gratis) u otra Postgres y pegá DATABASE_URL en el dashboard.
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: midulcecata
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm run render:build
+    startCommand: npm run start --prefix server
+    healthCheckPath: /api/public/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: PUBLIC_URL
+        sync: false
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: DATABASE_URL
+        sync: false

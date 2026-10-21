@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: midulcecata
+      POSTGRES_PASSWORD: midulcecata
+      POSTGRES_DB: midulcecata
+    volumes:
+      - mdc_pgdata:/var/lib/postgresql/data
+
+volumes:
+  mdc_pgdata:
