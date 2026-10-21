@@ -4,6 +4,11 @@ import crypto from "crypto";
 import sharp from "sharp";
 import { uploadsDir, MAX_IMAGE_BYTES } from "./constants";
 import { assertFilename } from "./sanitize";
+import {
+  destroyCloudinaryImage,
+  isCloudinaryEnabled,
+  uploadImageBuffer,
+} from "./media";
 
 export type ImageKind = "product" | "hero" | "banner" | "background" | "logo" | "icon";
 
@@ -69,8 +74,7 @@ export async function saveOptimizedImage(buffer: Buffer, kind: ImageKind): Promi
   }
 
   const filename = `img_${crypto.randomBytes(16).toString("hex")}.webp`;
-  await fs.promises.mkdir(uploadsDir, { recursive: true });
-  await fs.promises.writeFile(path.join(uploadsDir, filename), output);
+  await persistImage(filename, output);
   return filename;
 }
 
@@ -86,9 +90,17 @@ export async function saveFromSource(
     : pipeline.resize({ width, height, fit: "inside", withoutEnlargement: false });
   const output = await resized.webp({ quality: 76 }).toBuffer();
   const filename = `img_${crypto.randomBytes(16).toString("hex")}.webp`;
+  await persistImage(filename, output);
+  return filename;
+}
+
+async function persistImage(filename: string, output: Buffer): Promise<void> {
+  if (isCloudinaryEnabled()) {
+    await uploadImageBuffer(output, filename);
+    return;
+  }
   await fs.promises.mkdir(uploadsDir, { recursive: true });
   await fs.promises.writeFile(path.join(uploadsDir, filename), output);
-  return filename;
 }
 
 export function placeholderSvg(label: string): Buffer {
@@ -120,6 +132,10 @@ export async function removeUpload(filename: string | null | undefined): Promise
   try {
     assertFilename(filename);
   } catch {
+    return;
+  }
+  if (isCloudinaryEnabled()) {
+    await destroyCloudinaryImage(filename);
     return;
   }
   const target = path.join(uploadsDir, filename);

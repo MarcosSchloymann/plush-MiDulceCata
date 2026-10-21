@@ -2,6 +2,7 @@ import { SiteSetting, Product, ProductImage, SocialLink } from "@prisma/client";
 import { prisma } from "./db";
 import { defaultSettings, parseColumns, PublicSettings } from "./defaults";
 import { PLATFORMS, Platform } from "./constants";
+import { mediaBaseUrl } from "./media";
 
 type ProductWithImages = Product & { images: ProductImage[] };
 
@@ -65,6 +66,7 @@ export async function getPublicSite() {
     settings: mapSettings(settingsRow),
     products: products.map(serializeProduct),
     socials: mapSocials(socialRows),
+    mediaBase: mediaBaseUrl(),
   };
 }
 

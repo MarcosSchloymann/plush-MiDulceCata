@@ -81,6 +81,7 @@ No hay `npm run lint` ni `npm test`.
 - Toda mutación (`POST`, `PUT`, `PATCH`, `DELETE`) exige la cookie `mdc.sid` y el header `x-csrf-token`. Un `fetch` suelto sin `api()` falla con 403.
 - Las imágenes guardadas se llaman `img_` + 32 hex + `.webp`. Otro nombre se rechaza. Máximo 5 MB de entrada y 8 imágenes por producto. La primera imagen de la lista es la principal.
 - Sharp convierte a WEBP y baja la calidad si el archivo pasa de 300 KB. No guardar el original.
+- En producción (Render free) las fotos van a **Cloudinary** (`CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`). Sin eso, `uploads/` se borra al reiniciar. En local, sin esas variables, sigue el disco. El cliente arma la URL con `mediaBase` del endpoint `/api/public/site`.
 - WhatsApp, Facebook e Instagram solo aceptan HTTPS de sus dominios. Un teléfono se convierte a `https://wa.me/`. La lógica está en `server/src/social.ts`.
 - `footerColumns` se guarda como texto JSON en SQLite y se parsea al leer. No tratarlo como columna relacional.
 - `bootstrap()` crea el usuario admin, los ajustes y los productos solo si todavía no existen. Volver a correr el seed no pisa un catálogo ya cargado.
@@ -111,4 +112,4 @@ No hay `npm run lint` ni `npm test`.
 4. Confirmar que un cambio guardado se ve en el sitio público al volver a esa pestaña.
 5. Si cambió el servidor o los tipos, correr el build del cliente y `npx tsc -p tsconfig.json --noEmit` dentro de `server/`.
 6. Si cambió Prisma, aplicar la migración en Postgres local (`npm run db:up` + `npx prisma migrate deploy`) y comprobar que el seed sigue arrancando en una base vacía.
-7. Para Render: `DATABASE_URL` de Neon, `PUBLIC_URL` HTTPS, health en `/api/public/health`. Recordar que `uploads/` en plan free no es persistente entre redeploys.
+7. Para Render: `DATABASE_URL` de Neon, `PUBLIC_URL` HTTPS, health en `/api/public/health`, y las tres variables de Cloudinary. Sin Cloudinary, `uploads/` en plan free no es persistente entre redeploys.

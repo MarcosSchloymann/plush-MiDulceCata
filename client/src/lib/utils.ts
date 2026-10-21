@@ -5,8 +5,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Base de Cloudinary (sin barra final). Vacío = servir desde /uploads. */
+let mediaBase = "";
+
+export function configureMedia(base?: string | null) {
+  mediaBase = (base || "").replace(/\/$/, "");
+}
+
 export function media(filename?: string | null) {
   if (!filename) return "";
+  if (mediaBase) {
+    const id = filename.replace(/\.webp$/i, "");
+    return `${mediaBase}/${id}`;
+  }
   return `/uploads/${filename}`;
 }
 

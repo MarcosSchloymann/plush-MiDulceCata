@@ -58,5 +58,8 @@ export async function uploadImage(
   const form = new FormData();
   form.append("file", file);
   form.append("kind", kind);
-  return api<{ filename: string; url: string }>("/api/admin/uploads", { method: "POST", body: form });
+  return api<{ filename: string; url: string; mediaBase?: string }>("/api/admin/uploads", {
+    method: "POST",
+    body: form,
+  });
 }

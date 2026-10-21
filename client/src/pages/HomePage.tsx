@@ -10,7 +10,7 @@ import { ProductModal } from "@/components/public/ProductModal";
 import { Promos } from "@/components/public/Promos";
 import { Footer } from "@/components/public/Footer";
 import { Logo } from "@/components/public/Logo";
-import { media } from "@/lib/utils";
+import { configureMedia, media } from "@/lib/utils";
 
 const FAVORITES_KEY = "mdc-favorites";
 
@@ -59,6 +59,7 @@ export function HomePage() {
       try {
         const data = await api<SiteData>("/api/public/site");
         if (cancelled) return;
+        configureMedia(data.mediaBase);
         setSite(data);
         setError("");
         applyTheme(data.settings);

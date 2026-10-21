@@ -14,6 +14,7 @@ import { publicRouter } from "./routes/public";
 import { authRouter, ensureCsrf, requireAuth, requireCsrf } from "./routes/auth";
 import { adminRouter } from "./routes/admin";
 import { renderIndex, renderRobots, renderSitemap } from "./seo";
+import { isCloudinaryEnabled } from "./media";
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
@@ -25,6 +26,13 @@ async function main() {
   }
 
   fs.mkdirSync(uploadsDir, { recursive: true });
+  if (isCloudinaryEnabled()) {
+    console.log("Imágenes: Cloudinary");
+  } else if (process.env.NODE_ENV === "production") {
+    console.warn(
+      "CLOUDINARY_* no está configurado. En Render free las imágenes se pierden al reiniciar."
+    );
+  }
   await bootstrap();
 
   const app = express();
@@ -39,7 +47,7 @@ async function main() {
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
-          imgSrc: ["'self'", "data:", "blob:"],
+          imgSrc: ["'self'", "data:", "blob:", "https://res.cloudinary.com"],
           styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
           fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
           scriptSrc: ["'self'"],

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { api, ApiError, uploadImage } from "@/lib/api";
-import { media } from "@/lib/utils";
+import { configureMedia, media } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const ACCEPT = "image/jpeg,image/png,image/webp";
@@ -37,6 +37,7 @@ export function ImageField({
     try {
       const previous = filename;
       const uploaded = await uploadImage(file, kind);
+      configureMedia(uploaded.mediaBase);
       onChange(uploaded.filename);
       if (previous) {
         await api(`/api/admin/uploads/${previous}`, { method: "DELETE" }).catch(() => undefined);

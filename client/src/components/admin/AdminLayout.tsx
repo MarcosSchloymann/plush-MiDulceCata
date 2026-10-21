@@ -3,7 +3,8 @@ import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { ExternalLink, LayoutDashboard, LogOut, Menu, Palette, Share2, ShoppingBag } from "lucide-react";
 import { api, clearCsrf } from "@/lib/api";
 import { applyTheme } from "@/lib/theme";
-import type { Settings } from "@/lib/types";
+import type { Settings, SiteData } from "@/lib/types";
+import { configureMedia } from "@/lib/utils";
 import { Logo } from "@/components/public/Logo";
 
 type ToastContextValue = (message: string) => void;
@@ -32,6 +33,9 @@ export function AdminLayout() {
       .finally(() => setReady(true));
     api<Settings>("/api/admin/settings")
       .then((settings) => applyTheme(settings))
+      .catch(() => undefined);
+    api<SiteData>("/api/public/site")
+      .then((data) => configureMedia(data.mediaBase))
       .catch(() => undefined);
   }, []);
 

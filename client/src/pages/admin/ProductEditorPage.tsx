@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api, ApiError, uploadImage } from "@/lib/api";
 import { notifySiteChanged } from "@/lib/theme";
-import { media } from "@/lib/utils";
+import { configureMedia, media } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/constants";
 import type { Product } from "@/lib/types";
 import { Button } from "@/components/ui/button";
@@ -73,6 +73,7 @@ export function ProductEditorPage() {
       setBusy(true);
       try {
         const uploaded = await uploadImage(file, "product");
+        configureMedia(uploaded.mediaBase);
         setImages((current) => [...current, { filename: uploaded.filename }].slice(0, 8));
       } catch (err) {
         setError(err instanceof ApiError ? err.message : "No se pudo subir la imagen");

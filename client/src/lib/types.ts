@@ -67,6 +67,8 @@ export type SiteData = {
   settings: Settings;
   products: Product[];
   socials: Socials;
+  /** Si viene con valor, las imágenes se sirven desde Cloudinary. */
+  mediaBase?: string;
 };
 
 export type Summary = {

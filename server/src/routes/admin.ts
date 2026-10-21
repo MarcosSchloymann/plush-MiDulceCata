@@ -10,6 +10,7 @@ import { uploadsDir, MAX_IMAGE_BYTES, PLATFORMS, Platform } from "../constants";
 import { normalizeSocialUrl } from "../social";
 import { mapSettings, serializeProduct } from "../site";
 import { assertFilename } from "../sanitize";
+import { absoluteMediaUrl, mediaBaseUrl } from "../media";
 
 export const adminRouter = Router();
 
@@ -209,7 +210,7 @@ adminRouter.post("/uploads", upload.single("file"), async (req, res, next) => {
     }
     const kind = uploadKindSchema.parse(req.body.kind || "product");
     const filename = await saveOptimizedImage(req.file.buffer, kind);
-    res.status(201).json({ filename, url: `/uploads/${filename}` });
+    res.status(201).json({ filename, url: absoluteMediaUrl(filename), mediaBase: mediaBaseUrl() });
   } catch (error) {
     httpError(error, res, next);
   }

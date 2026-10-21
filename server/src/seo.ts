@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { getPublicSite } from "./site";
 import { escapeHtml, escapeXml } from "./sanitize";
 import { clientDistDir } from "./constants";
+import { absoluteMediaUrl } from "./media";
 
 export function publicOrigin(req: Request): string {
   const configured = (process.env.PUBLIC_URL || "").replace(/\/$/, "");
@@ -34,7 +35,7 @@ export async function renderIndex(req: Request, res: Response): Promise<void> {
     const imageFile = product?.images[0]?.filename || site.settings.heroImage;
     const origin = publicOrigin(req);
     const url = product ? `${origin}/?producto=${encodeURIComponent(product.slug)}` : `${origin}/`;
-    const image = imageFile ? `${origin}/uploads/${imageFile}` : `${origin}/favicon.svg`;
+    const image = imageFile ? absoluteMediaUrl(imageFile, origin) : `${origin}/favicon.svg`;
 
     meta = `
     <title>${escapeHtml(title)}</title>
