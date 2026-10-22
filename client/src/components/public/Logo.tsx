@@ -25,7 +25,7 @@ export function Logo({
           alt={name}
           width={364}
           height={116}
-          className="h-[58px] w-auto max-w-[182px] object-contain object-left sm:max-w-[190px]"
+          className="h-[77px] w-auto max-w-[240px] object-contain object-left sm:max-w-[251px]"
           decoding="async"
         />
       </span>

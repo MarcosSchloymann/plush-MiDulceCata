@@ -51,8 +51,8 @@ export function Header({ settings, socials, category, onCategory, onSearch }: He
           </a>
         )}
       </div>
-      <div className="mx-auto grid max-w-[1400px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-4 lg:px-8">
-        <a href="#inicio" aria-label="Ir al inicio" onClick={() => onCategory(null)} className="justify-self-start">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-1 lg:px-8">
+        <a href="#inicio" aria-label="Ir al inicio" onClick={() => onCategory(null)} className="justify-self-start leading-none">
           <Logo name={settings.brandName} script={settings.brandScript} image={settings.logoHeader} />
         </a>
         <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8" aria-label="Categorías">
