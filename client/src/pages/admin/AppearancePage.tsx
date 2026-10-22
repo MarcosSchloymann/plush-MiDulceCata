@@ -79,16 +79,32 @@ export function AppearancePage() {
             hint="Versión para fondo oscuro. PNG transparente · 364 × 116 px (o 546 × 174)."
           />
         </div>
-        <ImageField
-          label="Imagen del hero"
-          filename={form.heroImage}
-          kind="hero"
-          onChange={(heroImage) => patch({ heroImage })}
-        />
-        <p className="text-xs text-black/50">
-          Relación aproximada 12:5 · Resolución recomendada 1920 × 800 px · JPG o WEBP · menos de 400 KB.
-          El texto del hero va dentro de la imagen; el botón de WhatsApp se superpone abajo a la derecha.
-        </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <ImageField
+              label="Imagen del hero (escritorio)"
+              filename={form.heroImage}
+              kind="hero"
+              onChange={(heroImage) => patch({ heroImage })}
+            />
+            <p className="text-xs text-black/50">
+              Relación ≈ 12:5 · Recomendada 1920 × 800 px · JPG o WEBP · menos de 400 KB.
+              El texto va dentro de la imagen; WhatsApp se superpone abajo a la derecha.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <ImageField
+              label="Imagen del hero (celular)"
+              filename={form.heroImageMobile}
+              kind="hero"
+              onChange={(heroImageMobile) => patch({ heroImageMobile })}
+            />
+            <p className="text-xs text-black/50">
+              Relación ≈ 1:1,1 (un poco más alta que ancha) · Recomendada 1080 × 1188 px (o 1000 × 1100) ·
+              JPG o WEBP · menos de 400 KB. Si no cargás una, se usa la de escritorio.
+            </p>
+          </div>
+        </div>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="space-y-3">
             <Field label="Valor 1" value={form.feature1} onChange={(feature1) => patch({ feature1 })} />

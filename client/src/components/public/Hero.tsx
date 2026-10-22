@@ -3,7 +3,8 @@ import { media, whatsappHref } from "@/lib/utils";
 import { IconWhatsapp } from "./Icons";
 
 export function Hero({ settings, socials }: { settings: Settings; socials: Socials }) {
-  const image = media(settings.heroImage);
+  const desktop = media(settings.heroImage);
+  const mobile = media(settings.heroImageMobile) || desktop;
   const whatsapp = whatsappHref(socials.whatsapp, "Hola! Quiero hacer una consulta en Mi Dulce Cata.");
 
   return (
@@ -14,15 +15,20 @@ export function Hero({ settings, socials }: { settings: Settings; socials: Socia
       aria-label={settings.brandName}
     >
       <h1 className="sr-only">{settings.brandName}</h1>
-      {image ? (
-        <img
-          src={image}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          width={1920}
-          height={800}
-          fetchPriority="high"
-        />
+      {desktop || mobile ? (
+        <picture>
+          {settings.heroImageMobile && desktop && (
+            <source media="(min-width: 768px)" srcSet={desktop} />
+          )}
+          <img
+            src={mobile}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            width={settings.heroImageMobile ? 1080 : 1920}
+            height={settings.heroImageMobile ? 1188 : 800}
+            fetchPriority="high"
+          />
+        </picture>
       ) : (
         <div className="absolute inset-0 bg-[#3a2418]" />
       )}

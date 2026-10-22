@@ -59,6 +59,7 @@ model SiteSetting {
   heroTitle       String
   heroSubtitle    String
   heroImage       String   @default("")
+  heroImageMobile String   @default("")
   logoHeader      String   @default("")
   logoFooter      String   @default("")
   bodyBgImage     String   @default("")

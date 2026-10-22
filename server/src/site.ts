@@ -17,6 +17,7 @@ export function mapSettings(row: SiteSetting | null): PublicSettings {
     heroTitle: source.heroTitle,
     heroSubtitle: source.heroSubtitle,
     heroImage: source.heroImage,
+    heroImageMobile: source.heroImageMobile ?? "",
     logoHeader: source.logoHeader,
     logoFooter: source.logoFooter,
     bodyBgImage: source.bodyBgImage,

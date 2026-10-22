@@ -40,6 +40,7 @@ export type Settings = {
   heroTitle: string;
   heroSubtitle: string;
   heroImage: string;
+  heroImageMobile: string;
   logoHeader: string;
   logoFooter: string;
   bodyBgImage: string;

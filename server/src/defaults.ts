@@ -30,6 +30,7 @@ export const defaultSettings = {
   heroTitle: "Los sabores\nque se disfrutan,\nson sabores\nque se recuerdan.",
   heroSubtitle: "Mi Dulce Cata es un momento dulce, hecho para vos.",
   heroImage: "",
+  heroImageMobile: "",
   logoHeader: "",
   logoFooter: "",
   bodyBgImage: "",
@@ -62,6 +63,7 @@ export type PublicSettings = {
   heroTitle: string;
   heroSubtitle: string;
   heroImage: string;
+  heroImageMobile: string;
   logoHeader: string;
   logoFooter: string;
   bodyBgImage: string;

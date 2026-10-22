@@ -108,12 +108,17 @@ export function Header({ settings, socials, category, onCategory, onSearch }: He
           <button type="button" className="absolute right-4 top-4 p-2" aria-label="Cerrar menú" onClick={() => setOpen(false)}>
             <X />
           </button>
-          <nav className="flex h-full flex-col items-start gap-6 px-8 pt-24" aria-label="Categorías">
-            <button type="button" className="font-display text-3xl" onClick={() => choose(null)}>
+          <nav className="flex h-full flex-col items-start gap-10 px-8 pt-24" aria-label="Categorías">
+            <button type="button" className="font-display text-[1.78rem] leading-tight" onClick={() => choose(null)}>
               Todo el catálogo
             </button>
             {CATEGORIES.map((item) => (
-              <button key={item.slug} type="button" className="font-display text-3xl" onClick={() => choose(item.slug)}>
+              <button
+                key={item.slug}
+                type="button"
+                className="font-display text-[1.78rem] leading-tight"
+                onClick={() => choose(item.slug)}
+              >
                 {item.label}
               </button>
             ))}

@@ -68,6 +68,7 @@ export const settingsSchema = z.object({
   heroTitle: text(180, 2),
   heroSubtitle: text(220),
   heroImage: z.union([filename, z.literal("")]).default(""),
+  heroImageMobile: z.union([filename, z.literal("")]).default(""),
   logoHeader: z.union([filename, z.literal("")]).default(""),
   logoFooter: z.union([filename, z.literal("")]).default(""),
   bodyBgImage: z.union([filename, z.literal("")]).default(""),
