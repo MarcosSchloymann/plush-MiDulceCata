@@ -5,6 +5,8 @@ import { IconWhatsapp } from "./Icons";
 
 type Slide = { desktop: string; mobile: string };
 
+const SLIDE_MS = 700;
+
 function buildSlides(settings: Settings): Slide[] {
   const slides: Slide[] = [];
   if (settings.heroImage) {
@@ -25,20 +27,55 @@ function buildSlides(settings: Settings): Slide[] {
 export function Hero({ settings, socials }: { settings: Settings; socials: Socials }) {
   const slides = useMemo(() => buildSlides(settings), [settings]);
   const [index, setIndex] = useState(0);
+  const [outgoing, setOutgoing] = useState<number | null>(null);
+  const [entered, setEntered] = useState(true);
   const whatsapp = whatsappHref(socials.whatsapp, "Hola! Quiero hacer una consulta en Mi Dulce Cata.");
   const intervalSeconds = Math.min(120, Math.max(3, settings.heroIntervalSeconds || 10));
 
   useEffect(() => {
     setIndex(0);
+    setOutgoing(null);
+    setEntered(true);
   }, [slides.length, settings.heroImage, settings.heroImage2]);
 
   useEffect(() => {
     if (slides.length < 2) return;
     const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slides.length);
+      setIndex((current) => {
+        setOutgoing(current);
+        setEntered(false);
+        return (current + 1) % slides.length;
+      });
     }, intervalSeconds * 1000);
     return () => window.clearInterval(timer);
   }, [slides.length, intervalSeconds]);
+
+  useEffect(() => {
+    if (outgoing === null) return;
+    const enterFrame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setEntered(true));
+    });
+    const clearOutgoing = window.setTimeout(() => setOutgoing(null), SLIDE_MS);
+    return () => {
+      window.cancelAnimationFrame(enterFrame);
+      window.clearTimeout(clearOutgoing);
+    };
+  }, [index, outgoing]);
+
+  function slideTransform(slideIndex: number): string {
+    if (slideIndex === index) {
+      if (outgoing !== null && !entered) return "translate3d(100%, 0, 0)";
+      return "translate3d(0, 0, 0)";
+    }
+    if (slideIndex === outgoing) return "translate3d(-100%, 0, 0)";
+    return "translate3d(100%, 0, 0)";
+  }
+
+  function slideZ(slideIndex: number): number {
+    if (slideIndex === index) return 2;
+    if (slideIndex === outgoing) return 1;
+    return 0;
+  }
 
   return (
     <section
@@ -56,12 +93,17 @@ export function Hero({ settings, socials }: { settings: Settings; socials: Socia
           const desktop = media(slide.desktop);
           const mobile = media(slide.mobile);
           const active = slideIndex === index;
+          const leaving = slideIndex === outgoing;
           return (
             <picture
               key={`${slide.desktop}-${slide.mobile}-${slideIndex}`}
-              className={`absolute inset-0 block transition-opacity duration-700 ease-in-out ${
-                active ? "opacity-100" : "opacity-0"
-              }`}
+              className="absolute inset-0 block will-change-transform"
+              style={{
+                transform: slideTransform(slideIndex),
+                transition:
+                  active || leaving ? `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)` : "none",
+                zIndex: slideZ(slideIndex),
+              }}
               aria-hidden={!active}
             >
               {slide.mobile !== slide.desktop && (
@@ -75,6 +117,7 @@ export function Hero({ settings, socials }: { settings: Settings; socials: Socia
                 height={slide.mobile !== slide.desktop ? 1188 : 800}
                 fetchPriority={slideIndex === 0 ? "high" : "low"}
                 loading={slideIndex === 0 ? "eager" : "lazy"}
+                draggable={false}
               />
             </picture>
           );
