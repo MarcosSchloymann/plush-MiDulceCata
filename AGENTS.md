@@ -71,7 +71,7 @@ No hay `npm run lint` ni `npm test`.
 - Piezas de UI nuevas siguen el patrón de `client/src/components/ui/button.tsx`.
 - Las cards del catálogo mantienen el mismo alto, imagen a `aspect-[4/3]`, ancho completo y `object-cover`. Referencia: `client/src/components/public/ProductCard.tsx`.
 - El modal de producto ocupa el 80 % del viewport con estilo en línea. Referencia: `client/src/components/public/ProductModal.tsx`.
-- El hero es una imagen fija a lo ancho (`Hero.tsx`). Hay `heroImage` (escritorio, ≈12:5, 1920×800) y `heroImageMobile` (celular, ≈1:1,1, 1080×1188). Si falta la mobile, se usa la de escritorio. El texto va dentro de la foto; WhatsApp abajo a la derecha. No reabrir antetítulo/título/subtítulo del hero en Apariencia.
+- El hero es un carrusel a lo ancho (`Hero.tsx`): slides 1–2 con `heroImage`/`heroImageMobile` y `heroImage2`/`heroImageMobile2`. Escritorio ≈12:5 (1920×800); celular ≈1:1,1 (1080×1188). Si falta mobile, se usa la de escritorio del mismo slide. `heroIntervalSeconds` (3–120, default 10) solo rota si hay 2 slides. WhatsApp abajo a la derecha. No reabrir antetítulo/título/subtítulo del hero en Apariencia.
 - Hay dos logos de imagen: `logoHeader` (fondo claro) y `logoFooter` (fondo oscuro). Se editan en Apariencia. Si faltan, `Logo.tsx` usa el fallback tipográfico. Tamaño visual ≈ 240 × 77; archivo recomendado 364 × 116 PNG transparente.
 - Los íconos de valores (`feature1Image`…`feature3Image`) se editan junto con el texto en Apariencia. El contenedor es 40–44 px sin borde CSS; la imagen ocupa todo el DIV (`object-contain`). Tipografía intacta. Recomendado 88×88 PNG transparente. Sin imagen, se usan los íconos Lucide.
 

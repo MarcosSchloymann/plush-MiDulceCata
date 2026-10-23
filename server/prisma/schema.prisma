@@ -58,9 +58,12 @@ model SiteSetting {
   heroEyebrow     String
   heroTitle       String
   heroSubtitle    String
-  heroImage       String   @default("")
-  heroImageMobile String   @default("")
-  logoHeader      String   @default("")
+  heroImage           String @default("")
+  heroImageMobile     String @default("")
+  heroImage2          String @default("")
+  heroImageMobile2    String @default("")
+  heroIntervalSeconds Int    @default(10)
+  logoHeader          String @default("")
   logoFooter      String   @default("")
   bodyBgImage     String   @default("")
   bgColor         String

@@ -79,30 +79,69 @@ export function AppearancePage() {
             hint="Versión para fondo oscuro. PNG transparente · 364 × 116 px (o 546 × 174)."
           />
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-2">
-            <ImageField
-              label="Imagen del hero (escritorio)"
-              filename={form.heroImage}
-              kind="hero"
-              onChange={(heroImage) => patch({ heroImage })}
-            />
-            <p className="text-xs text-black/50">
-              Relación ≈ 12:5 · Recomendada 1920 × 800 px · JPG o WEBP · menos de 400 KB.
-              El texto va dentro de la imagen; WhatsApp se superpone abajo a la derecha.
-            </p>
+        <div className="space-y-2">
+          <Label htmlFor="hero-interval">Segundos entre imágenes del hero</Label>
+          <Input
+            id="hero-interval"
+            type="number"
+            min={3}
+            max={120}
+            value={form.heroIntervalSeconds ?? 10}
+            onChange={(event) => patch({ heroIntervalSeconds: Number(event.target.value) || 10 })}
+            className="max-w-[140px]"
+          />
+          <p className="text-xs text-black/50">Entre 3 y 120. Por defecto 10. Solo rota si hay al menos dos slides.</p>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium">Slide 1</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <ImageField
+                label="Escritorio"
+                filename={form.heroImage}
+                kind="hero"
+                onChange={(heroImage) => patch({ heroImage })}
+              />
+              <p className="text-xs text-black/50">≈ 12:5 · 1920 × 800 px · JPG o WEBP · &lt; 400 KB.</p>
+            </div>
+            <div className="space-y-2">
+              <ImageField
+                label="Celular"
+                filename={form.heroImageMobile}
+                kind="hero"
+                onChange={(heroImageMobile) => patch({ heroImageMobile })}
+              />
+              <p className="text-xs text-black/50">
+                ≈ 1:1,1 · 1080 × 1188 px. Si falta, se usa la de escritorio.
+              </p>
+            </div>
           </div>
-          <div className="space-y-2">
-            <ImageField
-              label="Imagen del hero (celular)"
-              filename={form.heroImageMobile}
-              kind="hero"
-              onChange={(heroImageMobile) => patch({ heroImageMobile })}
-            />
-            <p className="text-xs text-black/50">
-              Relación ≈ 1:1,1 (un poco más alta que ancha) · Recomendada 1080 × 1188 px (o 1000 × 1100) ·
-              JPG o WEBP · menos de 400 KB. Si no cargás una, se usa la de escritorio.
-            </p>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium">Slide 2</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <ImageField
+                label="Escritorio"
+                filename={form.heroImage2}
+                kind="hero"
+                onChange={(heroImage2) => patch({ heroImage2 })}
+              />
+              <p className="text-xs text-black/50">Misma proporción que el slide 1 (1920 × 800).</p>
+            </div>
+            <div className="space-y-2">
+              <ImageField
+                label="Celular"
+                filename={form.heroImageMobile2}
+                kind="hero"
+                onChange={(heroImageMobile2) => patch({ heroImageMobile2 })}
+              />
+              <p className="text-xs text-black/50">
+                Si falta, se usa la de escritorio del slide 2. Sin slide 2, el hero queda fijo.
+              </p>
+            </div>
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-3">

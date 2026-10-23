@@ -31,6 +31,9 @@ export const defaultSettings = {
   heroSubtitle: "Mi Dulce Cata es un momento dulce, hecho para vos.",
   heroImage: "",
   heroImageMobile: "",
+  heroImage2: "",
+  heroImageMobile2: "",
+  heroIntervalSeconds: 10,
   logoHeader: "",
   logoFooter: "",
   bodyBgImage: "",
@@ -64,6 +67,9 @@ export type PublicSettings = {
   heroSubtitle: string;
   heroImage: string;
   heroImageMobile: string;
+  heroImage2: string;
+  heroImageMobile2: string;
+  heroIntervalSeconds: number;
   logoHeader: string;
   logoFooter: string;
   bodyBgImage: string;

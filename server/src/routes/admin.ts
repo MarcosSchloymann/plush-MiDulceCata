@@ -226,6 +226,8 @@ adminRouter.delete("/uploads/:filename", async (req, res, next) => {
       [
         settings.heroImage,
         settings.heroImageMobile,
+        settings.heroImage2,
+        settings.heroImageMobile2,
         settings.logoHeader,
         settings.logoFooter,
         settings.bodyBgImage,
@@ -310,6 +312,8 @@ adminRouter.put("/settings", async (req, res, next) => {
       const previousFiles = [
         previous.heroImage,
         previous.heroImageMobile,
+        previous.heroImage2,
+        previous.heroImageMobile2,
         previous.logoHeader,
         previous.logoFooter,
         previous.bodyBgImage,
@@ -322,6 +326,8 @@ adminRouter.put("/settings", async (req, res, next) => {
       const nextFiles = new Set([
         data.heroImage,
         data.heroImageMobile,
+        data.heroImage2,
+        data.heroImageMobile2,
         data.logoHeader,
         data.logoFooter,
         data.bodyBgImage,

@@ -69,6 +69,14 @@ export const settingsSchema = z.object({
   heroSubtitle: text(220),
   heroImage: z.union([filename, z.literal("")]).default(""),
   heroImageMobile: z.union([filename, z.literal("")]).default(""),
+  heroImage2: z.union([filename, z.literal("")]).default(""),
+  heroImageMobile2: z.union([filename, z.literal("")]).default(""),
+  heroIntervalSeconds: z.coerce
+    .number()
+    .int("Usá un número entero")
+    .min(3, "Mínimo 3 segundos")
+    .max(120, "Máximo 120 segundos")
+    .default(10),
   logoHeader: z.union([filename, z.literal("")]).default(""),
   logoFooter: z.union([filename, z.literal("")]).default(""),
   bodyBgImage: z.union([filename, z.literal("")]).default(""),

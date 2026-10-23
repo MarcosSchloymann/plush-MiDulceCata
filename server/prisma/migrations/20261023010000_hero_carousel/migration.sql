@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "SiteSetting" ADD COLUMN "heroImage2" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "SiteSetting" ADD COLUMN "heroImageMobile2" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "SiteSetting" ADD COLUMN "heroIntervalSeconds" INTEGER NOT NULL DEFAULT 10;

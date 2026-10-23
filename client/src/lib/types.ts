@@ -41,6 +41,9 @@ export type Settings = {
   heroSubtitle: string;
   heroImage: string;
   heroImageMobile: string;
+  heroImage2: string;
+  heroImageMobile2: string;
+  heroIntervalSeconds: number;
   logoHeader: string;
   logoFooter: string;
   bodyBgImage: string;
