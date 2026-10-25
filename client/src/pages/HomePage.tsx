@@ -6,6 +6,7 @@ import { Header } from "@/components/public/Header";
 import { Hero } from "@/components/public/Hero";
 import { Features } from "@/components/public/Features";
 import { Catalog } from "@/components/public/Catalog";
+import { MidBanner } from "@/components/public/MidBanner";
 import { ProductModal } from "@/components/public/ProductModal";
 import { Promos } from "@/components/public/Promos";
 import { Footer } from "@/components/public/Footer";
@@ -176,6 +177,7 @@ export function HomePage() {
         }
       >
         <Catalog products={filtered} favorites={favorites} onOpen={openProduct} onFavorite={toggleFavorite} />
+        <MidBanner settings={site.settings} />
         <Promos settings={site.settings} socials={site.socials} />
       </main>
       <Footer settings={site.settings} socials={site.socials} />

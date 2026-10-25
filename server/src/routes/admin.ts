@@ -234,6 +234,7 @@ adminRouter.delete("/uploads/:filename", async (req, res, next) => {
         settings.feature1Image,
         settings.feature2Image,
         settings.feature3Image,
+        settings.midBannerImage,
         settings.promo1Image,
         settings.promo2Image,
       ].includes(filename);
@@ -320,6 +321,7 @@ adminRouter.put("/settings", async (req, res, next) => {
         previous.feature1Image,
         previous.feature2Image,
         previous.feature3Image,
+        previous.midBannerImage,
         previous.promo1Image,
         previous.promo2Image,
       ];
@@ -334,6 +336,7 @@ adminRouter.put("/settings", async (req, res, next) => {
         data.feature1Image,
         data.feature2Image,
         data.feature3Image,
+        data.midBannerImage,
         data.promo1Image,
         data.promo2Image,
       ]);

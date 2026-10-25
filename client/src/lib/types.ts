@@ -57,6 +57,7 @@ export type Settings = {
   feature1Image: string;
   feature2Image: string;
   feature3Image: string;
+  midBannerImage: string;
   promo1Title: string;
   promo1Image: string;
   promo2Title: string;

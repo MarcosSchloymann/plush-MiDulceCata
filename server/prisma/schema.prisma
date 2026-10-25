@@ -76,6 +76,7 @@ model SiteSetting {
   feature1Image   String   @default("")
   feature2Image   String   @default("")
   feature3Image   String   @default("")
+  midBannerImage  String   @default("")
   promo1Title     String
   promo1Image     String   @default("")
   promo2Title     String

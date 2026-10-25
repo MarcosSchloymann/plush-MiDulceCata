@@ -190,6 +190,20 @@ export function AppearancePage() {
       </section>
 
       <section className="space-y-4 bg-white p-5 shadow-sm">
+        <h2 className="font-display text-2xl">Banner debajo del catálogo</h2>
+        <ImageField
+          label="Imagen del banner"
+          filename={form.midBannerImage}
+          kind="banner"
+          onChange={(midBannerImage) => patch({ midBannerImage })}
+        />
+        <p className="text-xs text-black/50">
+          A lo ancho, entre el catálogo y los regalos (ej. Tour Cacao). El texto y el diseño van dentro de la
+          imagen · Recomendada 1920 × 560 px · JPG o WEBP · menos de 400 KB. Si no cargás una, no se muestra.
+        </p>
+      </section>
+
+      <section className="space-y-4 bg-white p-5 shadow-sm">
         <h2 className="font-display text-2xl">Bloques y llamado</h2>
         <Area label="Título regalos corporativos" value={form.promo1Title} onChange={(promo1Title) => patch({ promo1Title })} />
         <ImageField label="Imagen corporativa" filename={form.promo1Image} kind="banner" onChange={(promo1Image) => patch({ promo1Image })} />
