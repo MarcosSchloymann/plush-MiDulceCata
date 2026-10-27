@@ -48,6 +48,7 @@ export const defaultSettings = {
   feature2Image: "",
   feature3Image: "",
   midBannerImage: "",
+  midBannerImageMobile: "",
   promo1Title: "Regalos\ncorporativos",
   promo1Image: "",
   promo2Title: "Regalos\nempresariales",
@@ -85,6 +86,7 @@ export type PublicSettings = {
   feature2Image: string;
   feature3Image: string;
   midBannerImage: string;
+  midBannerImageMobile: string;
   promo1Title: string;
   promo1Image: string;
   promo2Title: string;

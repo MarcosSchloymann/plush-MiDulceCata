@@ -91,6 +91,7 @@ export const settingsSchema = z.object({
   feature2Image: z.union([filename, z.literal("")]).default(""),
   feature3Image: z.union([filename, z.literal("")]).default(""),
   midBannerImage: z.union([filename, z.literal("")]).default(""),
+  midBannerImageMobile: z.union([filename, z.literal("")]).default(""),
   promo1Title: text(80),
   promo1Image: z.union([filename, z.literal("")]).default(""),
   promo2Title: text(80),

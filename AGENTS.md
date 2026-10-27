@@ -70,7 +70,7 @@ No hay `npm run lint` ni `npm test`.
 - Formularios del panel: validar en el cliente y otra vez en el servidor con Zod. Referencia: `server/src/schemas.ts` y `client/src/lib/api.ts`.
 - Piezas de UI nuevas siguen el patrón de `client/src/components/ui/button.tsx`.
 - Las cards del catálogo mantienen el mismo alto, imagen a `aspect-[4/3]`, ancho completo y `object-cover`. Referencia: `client/src/components/public/ProductCard.tsx`.
-- Debajo del catálogo hay un banner a lo ancho (`midBannerImage` / `MidBanner.tsx`), opcional. Diseño dentro de la imagen; recomendado 1920 × 560. Sin imagen no se renderiza.
+- Debajo del catálogo hay un banner a lo ancho (`MidBanner.tsx`): `midBannerImage` (escritorio, 1920×560) y `midBannerImageMobile` (celular, ≈1:1,1 / 1080×1188). Sin desktop no se renderiza; si falta mobile se usa desktop.
 - El modal de producto ocupa el 80 % del viewport con estilo en línea. Referencia: `client/src/components/public/ProductModal.tsx`.
 - El hero es un carrusel a lo ancho (`Hero.tsx`): slides 1–2 con `heroImage`/`heroImageMobile` y `heroImage2`/`heroImageMobile2`. Escritorio ≈12:5 (1920×800); celular ≈1:1,1 (1080×1188). Si falta mobile, se usa la de escritorio del mismo slide. `heroIntervalSeconds` (3–120, default 10) solo rota si hay 2 slides. WhatsApp abajo a la derecha. No reabrir antetítulo/título/subtítulo del hero en Apariencia.
 - Hay dos logos de imagen: `logoHeader` (fondo claro) y `logoFooter` (fondo oscuro). Se editan en Apariencia. Si faltan, `Logo.tsx` usa el fallback tipográfico. Tamaño visual ≈ 240 × 77; archivo recomendado 364 × 116 PNG transparente.

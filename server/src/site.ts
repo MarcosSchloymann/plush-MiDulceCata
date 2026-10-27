@@ -35,6 +35,7 @@ export function mapSettings(row: SiteSetting | null): PublicSettings {
     feature2Image: source.feature2Image,
     feature3Image: source.feature3Image,
     midBannerImage: source.midBannerImage ?? "",
+    midBannerImageMobile: source.midBannerImageMobile ?? "",
     promo1Title: source.promo1Title,
     promo1Image: source.promo1Image,
     promo2Title: source.promo2Title,

@@ -191,16 +191,32 @@ export function AppearancePage() {
 
       <section className="space-y-4 bg-white p-5 shadow-sm">
         <h2 className="font-display text-2xl">Banner debajo del catálogo</h2>
-        <ImageField
-          label="Imagen del banner"
-          filename={form.midBannerImage}
-          kind="banner"
-          onChange={(midBannerImage) => patch({ midBannerImage })}
-        />
-        <p className="text-xs text-black/50">
-          A lo ancho, entre el catálogo y los regalos (ej. Tour Cacao). El texto y el diseño van dentro de la
-          imagen · Recomendada 1920 × 560 px · JPG o WEBP · menos de 400 KB. Si no cargás una, no se muestra.
-        </p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <ImageField
+              label="Banner (escritorio)"
+              filename={form.midBannerImage}
+              kind="banner"
+              onChange={(midBannerImage) => patch({ midBannerImage })}
+            />
+            <p className="text-xs text-black/50">
+              A lo ancho · Recomendada 1920 × 560 px · JPG o WEBP · &lt; 400 KB. El diseño va dentro de la
+              imagen. Sin esta, el banner no se muestra.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <ImageField
+              label="Banner (celular)"
+              filename={form.midBannerImageMobile}
+              kind="banner"
+              onChange={(midBannerImageMobile) => patch({ midBannerImageMobile })}
+            />
+            <p className="text-xs text-black/50">
+              Pantallas &lt; 768 px · Recomendada 1080 × 1188 px (≈ 1:1,1) · JPG o WEBP · &lt; 400 KB. Si no
+              cargás una, se usa la de escritorio.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="space-y-4 bg-white p-5 shadow-sm">
