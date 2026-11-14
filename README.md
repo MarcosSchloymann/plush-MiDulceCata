@@ -156,6 +156,26 @@ MiDulceCata/
     production.ps1
 ```
 
+## Deploy en DonWeb (Cloud Server + EasyPanel)
+
+Si el Cloud Server trae **EasyPanel**:
+
+1. Abrí `https://IP-DEL-SERVIDOR` y creá el admin (si falla `getaddrinfo EAI_AGAIN`, desmarcá “receive updates”).
+2. (Opcional) Ajustes → Dominio del Panel → un subdominio que apunte a la IP.
+3. En EasyPanel: **New Project** → **App** → Source **GitHub** → `MarcosSchloymann/plush-MiDulceCata` → branch `main`.
+4. Build: **Dockerfile** (archivo `Dockerfile` en la raíz).
+5. Environment: las mismas variables de producción (`NODE_ENV`, `PORT=4000`, `PUBLIC_URL`, `COOKIE_SECURE`, `DATABASE_URL` Neon, `SESSION_SECRET`, Cloudinary, admin).
+6. Domains: tu dominio (DNS A → IP del Cloud Server).
+7. **Deploy**. Health: `/api/public/health`.
+
+Seguí usando **Neon** + **Cloudinary**. El contenedor corre migrate al arrancar.
+
+### Alternativa sin EasyPanel (SSH + PM2)
+
+1. Node 20, Nginx, PM2 (`bash deploy/donweb-setup.sh`).
+2. Cloná el repo, `server/.env`, build, migrate, `pm2 start ecosystem.config.cjs`.
+3. Nginx + Certbot (`deploy/nginx-midulcecata.conf.example`).
+
 ## Deploy en Render (plan free)
 
 Render free duerme el servicio tras inactividad y **no guarda archivos** entre redeploys. Por eso la base va en Postgres externa (Neon gratis) y las imágenes subidas pueden perderse al redesplegar.
