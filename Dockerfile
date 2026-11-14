@@ -19,7 +19,8 @@ FROM deps AS build
 COPY . .
 RUN npm run build --prefix client
 RUN npm run build --prefix server
-RUN npx prisma generate --schema server/prisma/schema.prisma
+# Usar el Prisma 6 del proyecto (no `npx prisma` suelto, que baja Prisma 7)
+RUN npm exec --prefix server -- prisma generate
 
 FROM base AS runner
 ENV NODE_ENV=production
@@ -35,5 +36,5 @@ COPY --from=build /app/client/dist ./client/dist
 
 EXPOSE 4000
 WORKDIR /app/server
-# Advisory lock off: Neon pooler / cold start (mismo criterio que Render).
-CMD ["sh", "-c", "PRISMA_SCHEMA_DISABLE_ADVISORY_LOCK=1 npx prisma migrate deploy && node dist/index.js"]
+# Prisma local + advisory lock off (Neon)
+CMD ["sh", "-c", "PRISMA_SCHEMA_DISABLE_ADVISORY_LOCK=1 ./node_modules/.bin/prisma migrate deploy && node dist/index.js"]
