@@ -19,8 +19,8 @@ FROM deps AS build
 COPY . .
 RUN npm run build --prefix client
 RUN npm run build --prefix server
-# Usar el Prisma 6 del proyecto (no `npx prisma` suelto, que baja Prisma 7)
-RUN npm exec --prefix server -- prisma generate
+# Prisma 6 local; el cwd tiene que ser server/ (ahí está prisma/schema.prisma)
+RUN cd /app/server && ./node_modules/.bin/prisma generate
 
 FROM base AS runner
 ENV NODE_ENV=production
